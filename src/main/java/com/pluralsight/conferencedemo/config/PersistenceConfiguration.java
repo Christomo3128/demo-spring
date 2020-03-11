@@ -10,17 +10,17 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class PersistenceConfiguration {
 
-	@Value("${DB_URL}")
-	private String Urldb;
-	
-	@Bean
-	public DataSource dataSource() {
-		DataSourceBuilder builder = DataSourceBuilder.create();
-		builder.url(Urldb);
-		builder.username("postgres");
-		builder.password("admin");
-		System.out.println("Datasource personalizado esta funcionando.");
-		return builder.build();
-	}
-	
+//	@Value("${DB_URL}")
+//	private String Urldb;
+//	
+//	@Bean
+//	public DataSource dataSource() {
+//		DataSourceBuilder builder = DataSourceBuilder.create();
+//		builder.url(Urldb);
+//		builder.username("postgres");
+//		builder.password("admin");
+//		System.out.println("Datasource personalizado esta funcionando.");
+//		return builder.build();
+//	}
+//	
 }
