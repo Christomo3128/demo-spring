@@ -2,31 +2,31 @@ package com.pluralsight.conferencedemo.controllers;
 
 import java.util.List;
 
+import com.pluralsight.conferencedemo.service.SessionService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import com.pluralsight.conferencedemo.models.Session;
 import com.pluralsight.conferencedemo.repositories.SessionRepository;
 
 @RestController
-@RequestMapping("/api/v1/sessions")
-public class SessionsController {
+@RequestMapping("/api/v1")
+public class SessionController {
 
-	@Autowired
-	private SessionRepository sessionRepository;
+	@Autowired(required = true)
+	private SessionService sessionService;
 	
-	@GetMapping
-	public List<Session> list(){
-		return sessionRepository.findAll();
+	@GetMapping("/sessions")
+	@ResponseBody
+	public ResponseEntity<List<Session>> getAllSession() {
+		return new ResponseEntity<List<Session>>(sessionService.getAll(), HttpStatus.OK);
 	}
-	
+
+	/*
 	@GetMapping
 	@RequestMapping("{id}")
 	public Session get(@PathVariable Long id) {
@@ -49,4 +49,5 @@ public class SessionsController {
 		BeanUtils.copyProperties(session, existingSession, "session_id");
 		return sessionRepository.saveAndFlush(existingSession);
 	}
+	 */
 }
